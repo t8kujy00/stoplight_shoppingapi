@@ -120,13 +120,13 @@ paths:
       responses:
         '200':
           description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posting'
       operationId: get-posts
       description: List postings made by others.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Posting'
 components:
   schemas:
     User:
