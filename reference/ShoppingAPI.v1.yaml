@@ -11,90 +11,6 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  '/users/{userId}':
-    parameters:
-      - schema:
-          type: integer
-        name: userId
-        in: path
-        required: true
-        description: Id of an existing user.
-    get:
-      summary: Get User Info by User ID
-      tags: []
-      responses:
-        '200':
-          description: User Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Get User Alice Smith:
-                  value:
-                    id: 142
-                    firstName: Alice
-                    lastName: Smith
-                    email: alice.smith@gmail.com
-                    dateOfBirth: '1997-10-31'
-                    emailVerified: true
-                    signUpDate: '2019-08-24'
-        '404':
-          description: User Not Found
-      operationId: get-users-userId
-      description: Retrieve the information of the user with the matching user ID.
-    patch:
-      summary: Update User Information
-      operationId: patch-users-userId
-      responses:
-        '200':
-          description: User Updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Updated User Rebecca Baker:
-                  value:
-                    id: 13
-                    firstName: Rebecca
-                    lastName: Baker
-                    email: rebecca@gmail.com
-                    dateOfBirth: '1985-10-02'
-                    emailVerified: false
-                    createDate: '2019-08-24'
-        '404':
-          description: User Not Found
-        '409':
-          description: Email Already Taken
-      description: Update the infromation of an existing user.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                  description: 'If a new email is given, the user''s email verified property will be set to false.'
-                dateOfBirth:
-                  type: string
-            examples:
-              Update First Name:
-                value:
-                  firstName: Rebecca
-              Update Email:
-                value:
-                  email: rebecca@gmail.com
-              Update Last Name & Date of Birth:
-                value:
-                  lastName: Baker
-                  dateOfBirth: '1985-10-02'
-        description: Patch user properties to update.
   /user:
     post:
       summary: Create New User
@@ -113,7 +29,6 @@ paths:
                     firstName: Bob
                     lastName: Fellow
                     email: bob.fellow@gmail.com
-                    dateOfBirth: '1996-08-24'
                     emailVerified: false
                     createDate: '2020-11-18'
         '400':
@@ -132,23 +47,159 @@ paths:
                   type: string
                 email:
                   type: string
-                dateOfBirth:
-                  type: string
-                  format: date
               required:
                 - firstName
                 - lastName
                 - email
-                - dateOfBirth
             examples:
               Create User Bob Fellow:
                 value:
                   firstName: Bob
                   lastName: Fellow
                   email: bob.fellow@gmail.com
-                  dateOfBirth: '1996-08-24'
         description: Post the necessary fields for the API to create a new user.
       description: Create a new user.
+  /posting/:
+    post:
+      summary: ''
+      operationId: post-posting
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing required information.
+      description: Selling post created.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Title:
+                  type: string
+                Description:
+                  type: string
+                Category:
+                  type: string
+                Location:
+                  type: string
+                Images:
+                  type: string
+                Asking price:
+                  type:
+                    - string
+                    - number
+                Delivery type:
+                  type: string
+                Contact information:
+                  type:
+                    - string
+                    - number
+              required:
+                - Title
+                - Description
+                - Category
+                - Location
+                - Images
+                - Asking price
+                - Delivery type
+                - Contact information
+            examples:
+              New posting:
+                value:
+                  Title: Selling Trek Checkpoint ALR 4 bike
+                  Description: Bike was bought a year ago and is in good condition
+                  Category: Bikes
+                  Location: Oulu
+                  Images: bike.jpg
+                  Asking price: 1200€
+                  Delivery type: Pickup
+                  Contact information: 'Matti Meikäläinen, Karjakatu 4, 90100 Oulu, 0441234567'
+        description: Post the necessary fields for the API to create a new post.
+    put:
+      summary: ''
+      operationId: put-posting
+      responses:
+        '200':
+          description: OK
+      description: Modify existing posting information.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Title:
+                  type: string
+                Description:
+                  type: string
+                Category:
+                  type: string
+                Location:
+                  type: string
+                Images:
+                  type: string
+                Asking price:
+                  type:
+                    - string
+                    - number
+                Delivery type:
+                  type: string
+                Contact information:
+                  type:
+                    - string
+                    - number
+    delete:
+      summary: ''
+      operationId: delete-posting
+      responses:
+        '200':
+          description: OK
+      description: Delete existing posting.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        description: Delete post you made earlier.
+  /posts/:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-posts
+      description: List postings made by others.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Title:
+                  type: string
+                Description:
+                  type: string
+                Category:
+                  type: string
+                Location:
+                  type: string
+                Images:
+                  type: string
+                Asking price:
+                  type:
+                    - string
+                    - number
+                Date of posting:
+                  type:
+                    - string
+                    - number
+                Delivery type:
+                  type: string
+                Contact information:
+                  type:
+                    - string
+                    - number
 components:
   schemas:
     User:
@@ -161,7 +212,6 @@ components:
           firstName: Alice
           lastName: Smith
           email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
           emailVerified: true
           signUpDate: '2019-08-24'
       properties:
