@@ -121,7 +121,8 @@ paths:
       responses:
         '200':
           description: OK
-      description: Existing postin modified.
+          headers: {}
+      description: Existing posting modified.
       requestBody:
         content:
           application/json:
@@ -148,6 +149,10 @@ paths:
                   type:
                     - string
                     - number
+          application/xml:
+            schema:
+              type: object
+              properties: {}
     delete:
       summary: Delete posting
       operationId: delete-posting
