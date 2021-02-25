@@ -59,16 +59,16 @@ paths:
                   email: bob.fellow@gmail.com
         description: Post the necessary fields for the API to create a new user.
       description: Create a new user.
-  /posting/:
+  /posting:
     post:
-      summary: ''
+      summary: Create new posting
       operationId: post-posting
       responses:
         '200':
           description: OK
         '400':
           description: Missing required information.
-      description: Selling post created.
+      description: Selling posting created.
       parameters: []
       requestBody:
         content:
@@ -89,13 +89,11 @@ paths:
                 Asking price:
                   type:
                     - string
-                    - number
                 Delivery type:
                   type: string
                 Contact information:
                   type:
                     - string
-                    - number
               required:
                 - Title
                 - Description
@@ -118,12 +116,12 @@ paths:
                   Contact information: 'Matti Meikäläinen, Karjakatu 4, 90100 Oulu, 0441234567'
         description: Post the necessary fields for the API to create a new post.
     put:
-      summary: ''
+      summary: Modify existing posting
       operationId: put-posting
       responses:
         '200':
           description: OK
-      description: Modify existing posting information.
+      description: Existing postin modified.
       requestBody:
         content:
           application/json:
@@ -151,7 +149,7 @@ paths:
                     - string
                     - number
     delete:
-      summary: ''
+      summary: Delete posting
       operationId: delete-posting
       responses:
         '200':
@@ -191,9 +189,8 @@ paths:
                     - string
                     - number
                 Date of posting:
-                  type:
-                    - string
-                    - number
+                  type: string
+                  format: date
                 Delivery type:
                   type: string
                 Contact information:
@@ -225,10 +222,6 @@ components:
         email:
           type: string
           format: email
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1997-10-31'
         emailVerified:
           type: boolean
           description: Set to true if the user's email has been verified.
