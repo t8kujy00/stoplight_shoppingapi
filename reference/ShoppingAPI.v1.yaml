@@ -87,13 +87,11 @@ paths:
                 Images:
                   type: string
                 Asking price:
-                  type:
-                    - string
+                  type: string
                 Delivery type:
                   type: string
                 Contact information:
-                  type:
-                    - string
+                  type: string
               required:
                 - Title
                 - Description
@@ -140,15 +138,11 @@ paths:
                 Images:
                   type: string
                 Asking price:
-                  type:
-                    - string
-                    - number
+                  type: string
                 Delivery type:
                   type: string
                 Contact information:
-                  type:
-                    - string
-                    - number
+                  type: string
           application/xml:
             schema:
               type: object
@@ -159,18 +153,25 @@ paths:
       responses:
         '200':
           description: OK
+          headers: {}
       description: Delete existing posting.
       requestBody:
         content:
           application/json:
             schema:
               type: object
+          application/xml:
+            schema:
+              type: object
+              properties: {}
         description: Delete post you made earlier.
   /posts/:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-posts
       description: List postings made by others.
       requestBody:
@@ -190,18 +191,14 @@ paths:
                 Images:
                   type: string
                 Asking price:
-                  type:
-                    - string
-                    - number
+                  type: string
                 Date of posting:
                   type: string
                   format: date
                 Delivery type:
                   type: string
                 Contact information:
-                  type:
-                    - string
-                    - number
+                  type: string
 components:
   schemas:
     User:
