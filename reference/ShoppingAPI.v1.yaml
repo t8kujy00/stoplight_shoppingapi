@@ -155,17 +155,7 @@ paths:
           description: OK
           headers: {}
       description: Delete existing posting.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-          application/xml:
-            schema:
-              type: object
-              properties: {}
-        description: Delete post you made earlier.
-  /posts/:
+  /posts:
     get:
       summary: Your GET endpoint
       tags: []
