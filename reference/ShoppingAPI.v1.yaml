@@ -66,6 +66,7 @@ paths:
       responses:
         '200':
           description: OK
+          headers: {}
         '400':
           description: Missing required information.
       description: Selling posting created.
@@ -74,33 +75,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                Title:
-                  type: string
-                Description:
-                  type: string
-                Category:
-                  type: string
-                Location:
-                  type: string
-                Images:
-                  type: string
-                Asking price:
-                  type: string
-                Delivery type:
-                  type: string
-                Contact information:
-                  type: string
-              required:
-                - Title
-                - Description
-                - Category
-                - Location
-                - Images
-                - Asking price
-                - Delivery type
-                - Contact information
+              $ref: '#/components/schemas/Posting'
             examples:
               New posting:
                 value:
@@ -125,24 +100,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                Title:
-                  type: string
-                Description:
-                  type: string
-                Category:
-                  type: string
-                Location:
-                  type: string
-                Images:
-                  type: string
-                Asking price:
-                  type: string
-                Delivery type:
-                  type: string
-                Contact information:
-                  type: string
+              $ref: '#/components/schemas/Posting'
           application/xml:
             schema:
               type: object
@@ -168,27 +126,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                Title:
-                  type: string
-                Description:
-                  type: string
-                Category:
-                  type: string
-                Location:
-                  type: string
-                Images:
-                  type: string
-                Asking price:
-                  type: string
-                Date of posting:
-                  type: string
-                  format: date
-                Delivery type:
-                  type: string
-                Contact information:
-                  type: string
+              $ref: '#/components/schemas/Posting'
 components:
   schemas:
     User:
@@ -227,4 +165,34 @@ components:
         - lastName
         - email
         - emailVerified
+    Posting:
+      title: Posting
+      type: object
+      properties:
+        Title:
+          type: string
+        Description:
+          type: string
+        Category:
+          type: string
+        Location:
+          type: string
+        Images:
+          type: string
+        Asking price:
+          type: string
+        Delivery type:
+          type: string
+        Contact information:
+          type: string
+      x-examples:
+        Bike:
+          Title: Selling Trek Checkpoint ALR 4 bike
+          Description: Bike was bought a year ago and is in good condition
+          Category: Bikes
+          Location: Oulu
+          Images: bike.jpg
+          Asking price: 1200€
+          Delivery type: Pickup
+          Contact information: 'Matti Meikäläinen, Karjakatu 4, 90100 Oulu, 0441234567'
   securitySchemes: {}
